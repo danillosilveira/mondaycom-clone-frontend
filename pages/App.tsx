@@ -2,6 +2,7 @@ import * as React from "react";
 import Head from "../components/Head/Head";
 import Home from "./Home/Home";
 import { Switch, Route } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
         title="Monday.com Clone"
       />
 
+      <Navbar />
       <Switch>
         <Route exact path="/" render={() => <Home />} />
         <Route exact path="*" render={() => <div>page not found</div>} />
