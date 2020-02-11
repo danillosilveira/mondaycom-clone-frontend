@@ -1,0 +1,39 @@
+{
+  "name": "create-next-app-cli",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./server.js",
+    "build": "next build",
+    "start": "node ./server.js",
+    "export": "yarn run build && next export",
+    "deploy": "now --prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
+    "@material-ui/core": "^4.9.2",
+    "@zeit/next-css": "^1.0.1",
+    "apollo-boost": "^0.4.7",
+    "apollo-link-context": "^1.0.19",
+    "apollo-link-http": "^1.5.16",
+    "express": "^4.17.1",
+    "graphql": "^14.6.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-apollo": "^3.1.3",
+    "react-dom": "latest",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.0",
+    "@types/react": "^16.9.19",
+    "typescript": "^3.7.5"
+  }
+}
