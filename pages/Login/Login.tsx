@@ -4,7 +4,8 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Typography from "@material-ui/core/Typography";
 import { Container, Divider, Link } from "@material-ui/core";
-import QontoStepIcon, { QontoConnector } from "./QontoStepIcon";
+import QontoStepIcon from "./QontoStepIcon";
+import QontoConnector from "./QontoConnector";
 import { useLoginStyles } from "./Styles";
 import LoginForm from "./LoginForm";
 
@@ -16,8 +17,6 @@ const Login: React.FC = () => {
     "root" | "stepper" | "subTitle",
     string
   > = useLoginStyles();
-
-  const preventDefault = (e: React.SyntheticEvent) => e.preventDefault();
 
   const steps: Array<string> = ["Login to your account", "Enter your password"];
 

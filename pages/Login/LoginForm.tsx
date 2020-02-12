@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useLoginFormStyles } from "./Styles";
 import { Divider, TextField } from "@material-ui/core";
-import { validate } from "graphql";
 
 interface Props {
   activeStep: number;
