@@ -3,11 +3,33 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Typography from "@material-ui/core/Typography";
-import { Container, Divider, Link } from "@material-ui/core";
+import {
+  Container,
+  Divider,
+  Link,
+  makeStyles,
+  Theme,
+  createStyles
+} from "@material-ui/core";
 import QontoStepIcon from "./QontoStepIcon";
 import QontoConnector from "./QontoConnector";
-import { useLoginStyles } from "./Styles";
 import LoginForm from "./LoginForm";
+
+export const useLoginStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%"
+    },
+    stepper: {
+      marginTop: "20px"
+    },
+    subTitle: {
+      marginTop: "10px",
+      textAlign: "center",
+      fontWeight: "lighter"
+    }
+  })
+);
 
 const Login: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState<number>(0);

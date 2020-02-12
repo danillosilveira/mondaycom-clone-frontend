@@ -1,31 +1,35 @@
 import * as React from "react";
-import { withStyles, StepConnector, StepIconProps } from "@material-ui/core";
+import {
+  withStyles,
+  StepConnector,
+  StepIconProps,
+  makeStyles
+} from "@material-ui/core";
 import clsx from "clsx";
 import Check from "@material-ui/icons/Check";
-import { useQontoStepIconStyles } from "./Styles";
 
-export const QontoConnector = withStyles({
-  alternativeLabel: {
-    top: 10,
-    left: "calc(-50% + 16px)",
-    right: "calc(50% + 16px)"
+const useQontoStepIconStyles = makeStyles({
+  root: {
+    color: "#eaeaf0",
+    display: "flex",
+    height: 22,
+    alignItems: "center"
   },
   active: {
-    "& $line": {
-      borderColor: "#784af4"
-    }
+    color: "#784af4"
+  },
+  circle: {
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    backgroundColor: "currentColor"
   },
   completed: {
-    "& $line": {
-      borderColor: "#784af4"
-    }
-  },
-  line: {
-    borderColor: "#eaeaf0",
-    borderTopWidth: 3,
-    borderRadius: 1
+    color: "#784af4",
+    zIndex: 1,
+    fontSize: 18
   }
-})(StepConnector);
+});
 
 const QontoStepIcon: React.FC = (props: StepIconProps) => {
   const classes: Record<

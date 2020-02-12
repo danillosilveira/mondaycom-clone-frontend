@@ -4,8 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { useLoginFormStyles } from "./Styles";
-import { Divider, TextField } from "@material-ui/core";
+import { Divider, TextField, makeStyles } from "@material-ui/core";
 
 interface Props {
   activeStep: number;
@@ -13,6 +12,27 @@ interface Props {
   email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export const useLoginFormStyles = makeStyles({
+  pos: {
+    marginBottom: 12
+  },
+  button: {
+    marginTop: 15,
+    borderRadius: 25
+  },
+  header: {
+    textAlign: "center"
+  },
+  textField: {
+    marginTop: "5px"
+  },
+  subTitle: {
+    textAlign: "center",
+    fontSize: "19px",
+    fontWeight: "lighter"
+  }
+});
 
 const LoginForm: React.FC<Props> = ({
   activeStep,
