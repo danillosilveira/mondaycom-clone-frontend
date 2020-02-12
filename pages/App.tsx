@@ -3,6 +3,7 @@ import Head from "../components/Head/Head";
 import Home from "./Home/Home";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
+import Login from "./Login/Login";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       <Navbar />
       <Switch>
         <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/login" render={() => <Login />} />
         <Route exact path="*" render={() => <div>page not found</div>} />
       </Switch>
     </div>

@@ -1,6 +1,20 @@
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, {
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps
+} from "next/document";
 import React from "react";
 import { ServerStyleSheets } from "@material-ui/core";
+import {
+  RenderPage,
+  NextComponentType,
+  AppContextType,
+  AppInitialProps,
+  AppPropsType
+} from "next/dist/next-server/lib/utils";
+import { NextRouter } from "next/router";
 
 export default class MyDocument extends Document {
   render() {
@@ -16,16 +30,29 @@ export default class MyDocument extends Document {
   }
 }
 
-MyDocument.getInitialProps = async ctx => {
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
+MyDocument.getInitialProps = async (
+  ctx: DocumentContext
+): Promise<DocumentInitialProps> => {
+  const sheets: ServerStyleSheets = new ServerStyleSheets();
+  const originalRenderPage: RenderPage = ctx.renderPage;
 
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />)
+  ctx.renderPage = () => {
+    return originalRenderPage({
+      enhanceApp: (
+        App: NextComponentType<
+          AppContextType<NextRouter>,
+          AppInitialProps,
+          AppPropsType<NextRouter, {}>
+        >
+      ) => (props: React.PropsWithChildren<AppPropsType<NextRouter, {}>>) => {
+        return sheets.collect(<App {...props} />);
+      }
     });
+  };
 
-  const initialProps = await Document.getInitialProps(ctx);
+  const initialProps: DocumentInitialProps = await Document.getInitialProps(
+    ctx
+  );
 
   return {
     ...initialProps,
