@@ -4,17 +4,14 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import Send from "@material-ui/icons/Send";
+import Sidebar from "./Sidebar";
+import { isBrowser } from "../../lib/isBrowser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1
-    },
-    menuButton: {
-      marginRight: theme.spacing(2)
     },
     title: {
       flexGrow: 1
@@ -35,35 +32,60 @@ const useStyles = makeStyles((theme: Theme) =>
 const Navbar: React.FC = () => {
   const classes = useStyles();
 
+  const [windowWidth, setWindowWidth] = React.useState<number>(
+    isBrowser && window.innerWidth
+  );
+
+  React.useEffect(() => {
+    window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
+  });
+
+  const [state, setState] = React.useState<{ left: boolean }>({
+    left: false
+  });
+
+  type DrawerSide = "left";
+
+  const toggleDrawer = (side: DrawerSide, open: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent
+  ): void => {
+    if (
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
+  };
+
   return (
     <div className={classes.root}>
       <AppBar color="transparent" position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
+          {windowWidth <= 766 && (
+            <Sidebar toggleDrawer={toggleDrawer} state={state} />
+          )}
           <Typography variant="h6" className={classes.title}>
             <a className={classes.link} href="/">
-              Monday.com
+              MONDAY.COM
             </a>
           </Typography>
           <Button href="/login" color="inherit">
             Login
           </Button>
-          <Button
-            href="/get-started"
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            endIcon={<Send />}
-          >
-            Get Started
-          </Button>
+          {windowWidth > 766 && (
+            <Button
+              href="/get-started"
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              endIcon={<Send />}
+            >
+              Get Started
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>
