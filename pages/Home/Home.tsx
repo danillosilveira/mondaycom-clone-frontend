@@ -4,8 +4,9 @@ import { gql } from "apollo-boost";
 import { isBrowser } from "../../lib/isBrowser";
 import Button from "@material-ui/core/Button";
 import Send from "@material-ui/icons/Send";
+import { User } from "../../interfaces/DatabaseTypes/User";
 
-const Home: React.FC = () => {
+const Home: React.FC<{ activeUser: User | null }> = ({ activeUser }) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(
     isBrowser && window.innerWidth
   );
@@ -25,7 +26,7 @@ const Home: React.FC = () => {
   return (
     <div>
       {!loading && data.hello}
-      {windowWidth <= 766 && (
+      {windowWidth <= 766 && !activeUser && (
         <Button
           href="/get-started"
           variant="contained"

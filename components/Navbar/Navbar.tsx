@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Send from "@material-ui/icons/Send";
 import Sidebar from "./Sidebar";
 import { isBrowser } from "../../lib/isBrowser";
+import { User } from "../../interfaces/DatabaseTypes/User";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{ activeUser: User | null }> = ({ activeUser }) => {
   const classes = useStyles();
 
   const [windowWidth, setWindowWidth] = React.useState<number>(
@@ -65,26 +66,35 @@ const Navbar: React.FC = () => {
       <AppBar color="transparent" position="static">
         <Toolbar>
           {windowWidth <= 766 && (
-            <Sidebar toggleDrawer={toggleDrawer} state={state} />
+            <Sidebar
+              activeUser={activeUser}
+              toggleDrawer={toggleDrawer}
+              state={state}
+            />
           )}
           <Typography variant="h6" className={classes.title}>
             <a className={classes.link} href="/">
               MONDAY.COM
             </a>
           </Typography>
-          <Button href="/login" color="inherit">
-            Login
-          </Button>
-          {windowWidth > 766 && (
-            <Button
-              href="/get-started"
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-              endIcon={<Send />}
-            >
-              Get Started
-            </Button>
+          {!activeUser && (
+            <>
+              <Button href="/login" color="inherit">
+                Login
+              </Button>
+
+              {windowWidth > 766 && (
+                <Button
+                  href="/get-started"
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
+                  endIcon={<Send />}
+                >
+                  Get Started
+                </Button>
+              )}
+            </>
           )}
         </Toolbar>
       </AppBar>

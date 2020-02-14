@@ -12,6 +12,7 @@ import {
 } from "../../interfaces/PageInterface/Login/loginform.interfaces";
 import { LOGIN } from "../../graphql/user/mutation";
 import { useMutation } from "react-apollo";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 export const useLoginFormStyles = makeStyles({
   pos: {
@@ -34,11 +35,12 @@ export const useLoginFormStyles = makeStyles({
   }
 });
 
-const LoginForm: React.FC<Props> = ({
+const LoginForm: React.FC<Props & RouteComponentProps> = ({
   activeStep,
   setActiveStep,
   email,
-  setEmail
+  setEmail,
+  history
 }) => {
   const [password, setPassword] = React.useState<string>("");
   const [emailError, setEmailError] = React.useState<boolean>(false);
@@ -93,8 +95,11 @@ const LoginForm: React.FC<Props> = ({
             setPasswordError({ error: false, message: errorMessage });
           }
 
-          const token: string = data.login.token.token;
-          localStorage.setItem("token", token);
+          const userId: string = data.login.user.id;
+          localStorage.setItem("userId", userId);
+
+          history.push("/");
+          window.location.reload();
         }
       );
     }
@@ -172,4 +177,4 @@ const LoginForm: React.FC<Props> = ({
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

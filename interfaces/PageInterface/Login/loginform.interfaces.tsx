@@ -1,4 +1,4 @@
-import { Token } from "../../DatabaseTypes/Token";
+import { User } from "../../DatabaseTypes/User";
 
 export interface Props {
   activeStep: number;
@@ -8,7 +8,7 @@ export interface Props {
 }
 
 interface ReturnType {
-  token: Token;
+  user: User;
   errorMessage: string;
 }
 

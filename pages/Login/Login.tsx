@@ -14,6 +14,7 @@ import {
 import QontoStepIcon from "./QontoStepIcon";
 import QontoConnector from "./QontoConnector";
 import LoginForm from "./LoginForm";
+import OtherAuth from "../../components/Hoc/OtherAuth";
 
 export const useLoginStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,4 +85,6 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default OtherAuth(
+  session => session && session.activeUser.user !== null
+)(Login);

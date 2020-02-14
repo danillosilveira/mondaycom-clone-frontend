@@ -11,6 +11,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
+import { User } from "../../interfaces/DatabaseTypes/User";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,9 +35,10 @@ interface Props {
     open: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
   state: { left: boolean };
+  activeUser: User | null;
 }
 
-const Sidebar: React.FC<Props> = ({ toggleDrawer, state }) => {
+const Sidebar: React.FC<Props> = ({ toggleDrawer, state, activeUser }) => {
   const classes = useStyles();
 
   const sideList = (side: DrawerSide) => (
@@ -58,14 +60,15 @@ const Sidebar: React.FC<Props> = ({ toggleDrawer, state }) => {
       </List>
       <Divider />
       <List>
-        {["All mail", "Login", "Sign Up"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {!activeUser &&
+          ["All mail", "Login", "Sign Up"].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
       </List>
     </div>
   );

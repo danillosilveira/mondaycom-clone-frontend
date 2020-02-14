@@ -4,8 +4,20 @@ import Home from "./Home/Home";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Login from "./Login/Login";
+import SessionWrapperHOC from "../components/Hoc/SessionWrapperHOC";
+import { User } from "../interfaces/DatabaseTypes/User";
 
-const App: React.FC = () => {
+const App: React.FC<any> = ({ session }) => {
+  let activeUser: User | null;
+
+  if (session && session.activeUser.user !== null) {
+    activeUser = session.activeUser.user;
+  } else {
+    activeUser = null;
+  }
+
+  console.log(activeUser);
+
   return (
     <div>
       <Head
@@ -14,9 +26,9 @@ const App: React.FC = () => {
         title="Monday.com Clone"
       />
 
-      <Navbar />
+      <Navbar activeUser={activeUser} />
       <Switch>
-        <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/" render={() => <Home activeUser={activeUser} />} />
         <Route exact path="/login" render={() => <Login />} />
         <Route exact path="*" render={() => <div>page not found</div>} />
       </Switch>
@@ -24,4 +36,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default SessionWrapperHOC(App);
