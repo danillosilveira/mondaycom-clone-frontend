@@ -10,3 +10,26 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const SIGN_UP = gql`
+  mutation(
+    $fullName: String!
+    $email: String!
+    $password: String!
+    $teamName: String!
+  ) {
+    register(
+      data: {
+        fullName: $fullName
+        email: $email
+        password: $password
+        teamName: $teamName
+      }
+    ) {
+      user {
+        id
+      }
+      errorMessage
+    }
+  }
+`;

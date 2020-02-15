@@ -7,6 +7,7 @@ export const ACTIVE_USER = gql`
         id
         fullName
         email
+        teamName
         createdAt
       }
       errorMessage

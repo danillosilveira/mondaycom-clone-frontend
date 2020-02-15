@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Login from "./Login/Login";
 import SessionWrapperHOC from "../components/Hoc/SessionWrapperHOC";
 import { User } from "../interfaces/DatabaseTypes/User";
+import SignUp from "./Register/SignUp";
 
 const App: React.FC<any> = ({ session }) => {
   let activeUser: User | null;
@@ -30,6 +31,7 @@ const App: React.FC<any> = ({ session }) => {
       <Switch>
         <Route exact path="/" render={() => <Home activeUser={activeUser} />} />
         <Route exact path="/login" render={() => <Login />} />
+        <Route exact path="/signup" render={() => <SignUp />} />
         <Route exact path="*" render={() => <div>page not found</div>} />
       </Switch>
     </div>
