@@ -133,7 +133,7 @@ const SignUpForm: React.FC<Props & RouteComponentProps> = ({
           const userId: string = data.register.user.id;
           localStorage.setItem("userId", userId);
 
-          history.push("/");
+          history.push("/your-boards");
           window.location.reload();
         }
       }

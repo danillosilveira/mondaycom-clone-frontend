@@ -7,6 +7,7 @@ import Login from "./Login/Login";
 import SessionWrapperHOC from "../components/Hoc/SessionWrapperHOC";
 import { User } from "../interfaces/DatabaseTypes/User";
 import SignUp from "./Register/SignUp";
+import UserPage from "./UserPage/UserPage";
 
 const App: React.FC<any> = ({ session }) => {
   let activeUser: User | null;
@@ -27,11 +28,12 @@ const App: React.FC<any> = ({ session }) => {
         title="Monday.com Clone"
       />
 
-      <Navbar activeUser={activeUser} />
+      {!activeUser && <Navbar activeUser={activeUser} />}
       <Switch>
         <Route exact path="/" render={() => <Home activeUser={activeUser} />} />
         <Route exact path="/login" render={() => <Login />} />
         <Route exact path="/signup" render={() => <SignUp />} />
+        <Route exact path="/your-boards" render={() => <UserPage />} />
         <Route exact path="*" render={() => <div>page not found</div>} />
       </Switch>
     </div>

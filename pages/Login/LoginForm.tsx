@@ -98,7 +98,7 @@ const LoginForm: React.FC<Props & RouteComponentProps> = ({
           const userId: string = data.login.user.id;
           localStorage.setItem("userId", userId);
 
-          history.push("/");
+          history.push("/your-boards");
           window.location.reload();
         }
       );
